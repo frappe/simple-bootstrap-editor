@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Simple Bootstrap Editor 0.1</title>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.hotkeys.js"></script>
+	<script type="text/javascript" src="js/beautify-html.js"></script>
+	<script type="text/javascript" src="js/class.js"></script>
+	<script type="text/javascript" src="js/editor.js"></script>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+	<link type="text/css" rel="stylesheet" href="css/font-awesome.css">
+	<link rel="shortcut icon" href="" type="image/x-icon">
+	<link rel="stylesheet" href="css/dark.css">
+	<script src="js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<link rel="icon" href="" type="image/x-icon">
+	<style>
+	pre { border: 0px; padding: 0px; }
+	body { font-size: 16px; }
+	.container { max-width: 700px; }
+	</style>
+</head>
+<body>
+	
+<div class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" 
+				data-target=".navbar-responsive-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index">Simple Bootstrap Editor 0.1</a>
+		</div>
+		<!-- div class="collapse navbar-collapse navbar-responsive-collapse">
+			<ul class="nav navbar-nav navbar-left">
+				<li><a href="contact">About</a></li>
+			</ul>
+		</div -->
+	</div>
+</div>
+<script>$('.dropdown-toggle').dropdown()</script>
+<div class="container">
+	<ul class="nav nav-tabs" id="mytabs">
+	  <li class="active"><a href="#fixed" data-toggle="tab">Fixed</a></li>
+	  <li><a href="#inline" data-toggle="tab">Inline</a></li>
+	  <li><a href="#docs" data-toggle="tab">Documentation</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active fade in" id="fixed">
+			<div class="editable-content" style="padding: 5px; margin: 5px">
+				<h1 class="text-muted text-center" style="font-size: 50px"><i class="icon-edit"></i></h1>
+				<h2 class="text-center">Bootstrap Based HTML5 WYSIWYG Editor</h2>
+				<p class="text-center text-muted">Click me to edit!</p>
+				<hr>
+				<h3 class="text-danger">The Problem</h3>
+				<br>
+				<p>There are many text editors out there, yet nothing feels right:</p>
+				<ul>
+				    <li>TinyMCE, CKEdit etc: For industrial strength editing.</li>
+				    <li>Aloha, Mercury: Web 2.0, but still missing something.</li>
+				    <li>Boostrap WYSIWYG By Mindmup: Nice but too light.</li>
+				</ul>
+				<p>Here is the feature list we wanted:</p>
+				<ul>
+					<li>Bootstrap themed</li>
+					<li>Lightweight and easy to configure</li>
+					<li>For fixed (<code>contenteditable</code>) + inline editing</li>
+					<li>HTML editing</li>
+					<li>Image insertion</li>					
+				</ul>
+				<hr>
+				<h3 class="text-danger">The Solution</h3>
+				<br>
+				<p>We built a simple editor based on <a href="https://github.com/mindmup/bootstrap-wysiwyg/">Boostrap WYSIWYG By Mindmup</a> and added</p>
+				<ul>
+					<li>HTML editing and beautify_html</li>
+					<li>Inline and fixed options</li>
+					<li>Simple API</li>
+					<li>Extendable</li>
+				</ul>
+				<br>
+				<p class="text-center">
+					<button class="btn btn-success">See Demo</button>
+				</p>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="inline">
+			<div id="inline-parent" style="margin: 20px"></div>
+		</div>
+		<div class="tab-pane fade" id="docs">
+			<div style="margin: 20px">
+				<h3>Dependencies (bundled in repository)</h3>
+				<ul>
+					<li>Bootstrap</li>
+					<li>JQuery</li>
+					<li>JQuery.Hotkeys</li>
+					<li>Beautify HTML</li>
+					<li>Class (by John Resig)</li>
+				</ul>
+				<hr>
+				<h3>Fixed Editor</h3>
+				<p>Pass <code>editor</code> option with content to be edited</p>
+				<pre><code class="js">// fixed editor
+var fixed = new bsEditor({
+	editor: $(".editable-content"),
+	toolbar_style: {
+		"background-color": "black"
+	}
+});</code></pre>
+				<hr>
+				<h3>Inline Editor</h3>
+				<p>Pass <code>parent</code> option pointing to the parent element.</p>
+				<pre><code class="js">// inline
+var inline = new bsEditor({
+	parent: $("#inline-parent"),
+});
+inline.set_input("Write Something!")
+</code></pre>
+				<hr>
+				<h3>Options</h3>
+				<br>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th style="width: 30%">Option</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>editor</code></td>
+							<td>For fixed mode, this element will become <code>contenteditable</code></td>
+						</tr>
+						<tr>
+							<td><code>parent</code></td>
+							<td>For inline mode, make editor in this element</td>
+						</tr>
+						<tr>
+							<td><code>toolbar_style</code></td>
+							<td>CSS for toolbars</td>
+						</tr>
+						<tr>
+							<td><code>onsave</code></td>
+							<td>Function to be called on saving (fixed mode)</td>
+						</tr>
+						<tr>
+							<td><code>oncancel</code></td>
+							<td>Function to be called on cancel (fixed mode)</td>
+						</tr>
+						<tr>
+							<td><code>change</code></td>
+							<td>Function to be called on change (inline mode)</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<h3>Methods</h3>
+				<br>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th style="width: 30%">Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>set_input(html)</code></td>
+							<td>Set HTML in Editor</td>
+						</tr>
+						<tr>
+							<td><code>get_value()</code></td>
+							<td>Get Inner HTML</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+</div>
+<script>
+$(function() {
+	$("#mytabs").tab();
+	
+	// fixed
+	var fixed = new bsEditor({
+		editor: $(".editable-content"),
+		toolbar_style: {
+			"background-color": "black"
+		}
+	});
+
+	// inline
+	var inline = new bsEditor({
+		parent: $("#inline-parent"),
+	});
+	inline.set_input("Write Something!")
+
+})
+</script>
+
+<a href="https://github.com/webnotes/simple-bootstrap-editor"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 1002" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+
+<hr>
+<footer class="container">
+	<p>License MIT</p>
+	<p class="text-right">
+		<a style="font-size: 90%; color: #aaa;" href="http://erpnext.org">Made by ERPNext</a>
+	</p>
+</footer>
+
+</body>
+</html>
+<!-- 
+page:web-notes-home
+load status: fresh -->
