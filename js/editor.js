@@ -261,7 +261,7 @@ bsEditorToolbar = Class.extend({
 				</div>\
 				<div class="btn-group form-group">\
 					<a class="btn btn-default btn-small btn-html" title="HTML">\
-						<i class="icon-wrench"></i></a>\
+						<i class="icon-code"></i></a>\
 					<a class="btn btn-default btn-small btn-cancel" data-action="Cancel" title="Cancel">\
 						<i class="icon-remove"></i></a>\
 					<a class="btn btn-default btn-small btn-success" data-action="Save" title="Save">\
@@ -431,7 +431,7 @@ bsEditorToolbar = Class.extend({
 bsHTMLEditor = Class.extend({
 	init: function() {
 		var me = this;
-		this.modal = bs_get_modal("<i class='icon-wrench'></i> Edit HTML", '<textarea class="form-control" \
+		this.modal = bs_get_modal("<i class='icon-code'></i> Edit HTML", '<textarea class="form-control" \
 			style="height: 400px; width: 100%; font-family: Monaco, Courier New, Fixed; font-size: 11px">\
 			</textarea><br>\
 			<button class="btn btn-primary" style="margin-top: 7px;">Save</button>');
