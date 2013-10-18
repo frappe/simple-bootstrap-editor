@@ -303,6 +303,8 @@ bsEditorToolbar = Class.extend({
 	},
 
 	hide: function(action) {
+		if(!this.editor)
+			return;
 		var me = this;
 		this.toolbar.css("z-index", 0);
 		$("body").animate({"padding-top": 0 }, {complete: function() {

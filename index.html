@@ -185,7 +185,9 @@ inline.set_input("Write Something!")
 </div>
 <script>
 $(function() {
-	$("#mytabs").tab();
+	$("#mytabs").on('shown.bs.tab', function() {
+		fixed.toolbar.hide("Save");
+	});
 	
 	// fixed
 	var fixed = new bsEditor({
