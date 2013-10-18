@@ -170,7 +170,7 @@ bsEditor = Class.extend({
 			dataurl = parts[0] + ',' + parts[1];
 			if(me.options.max_file_size) {
 				if(dataurl.length > (me.options.max_file_size * 1024 * 1024 * 1.4)) {
-					bs_get_modal("Upload Error", "Max file size (" + me.options.max_file_size + "M) exceeded.");
+					bs_get_modal("Upload Error", "Max file size (" + me.options.max_file_size + "M) exceeded.").modal("show");
 					throw "file size exceeded";
 				}
 			}
@@ -437,7 +437,11 @@ bsHTMLEditor = Class.extend({
 			<button class="btn btn-primary" style="margin-top: 7px;">Save</button>');
 		this.modal.addClass("wn-ignore-click");
 		this.modal.find(".btn-primary").on("click", function() {
-			me.editor.html(me.modal.find("textarea").val());
+			var html = me.modal.find("textarea").val();
+			$.each(me.dataurls, function(key, val) {
+				html = html.replace(key, val);
+			})
+			me.editor.html();
 			me.modal.modal("hide");
 		});
 	},
@@ -445,7 +449,15 @@ bsHTMLEditor = Class.extend({
 		var me = this;
 		this.editor = editor;
 		this.modal.modal("show")
-		this.modal.find("textarea").html(html_beautify(me.editor.html()));
+		var html = me.editor.html();
+		// pack dataurls so that html display is faster
+		this.dataurls = {}
+		html = html.replace(/<img\s*src=\s*["\'](data:[^,]*),([^"\']*)["\']/g, function(full, g1, g2) {
+			var key = g2.slice(0,5) + "..." + g2.slice(-5);
+			me.dataurls[key] = g1 + "," + g2;
+			return '<img src="'+g1 + "," + key+'"';
+		})
+		this.modal.find("textarea").html(html_beautify(html));
 	}
 });
 
