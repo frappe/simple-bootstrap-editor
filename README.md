@@ -4,6 +4,6 @@ Bootstrap themed HTML5 WYSIWYG Editor based on [boostrap-wysiwyg](https://github
 
 #### Docs
 
-http://webnotes.github.io/simple-bootstrap-editor
+http://frappe.github.io/simple-bootstrap-editor
 
 #### License: MIT
